@@ -105,9 +105,12 @@ function Item({item,onDeleteItem,onToggleItem}: {item: {id: number; description:
 function Stats({ items }: { items: Item[] }) {
   const total = items.length;
   const packed = items.filter(i => i.packed).length;
+  const percentage = total === 0 ? 0 : Math.round((packed / total) * 100);
   return (
-    <footer className="stats">
-      <em>👜 you have {total} items on your list, and you already packed {packed}</em>
+    <footer className="stats">{
+      percentage === 100 ? " you got everything! ready to go! 👜 " :
+      <em>👜 you have {total} items on your list, and you already packed {packed} ({percentage}%)</em>
+      }
     </footer>
   );
 }
